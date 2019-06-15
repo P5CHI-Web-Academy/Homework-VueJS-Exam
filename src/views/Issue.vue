@@ -3,6 +3,14 @@
     <div v-if="Object.keys(currentIssue).length > 0">
       <hr>
       <v-layout row wrap class="mt-5">
+        <div>
+            <h2>{{ currentIssue.title }}</h2>
+        </div>
+        <hr>        
+        <div>
+          {{ currentIssue.body }}"
+        </div>
+        <hr>
         {{ currentIssue }}
       </v-layout>
     </div>
