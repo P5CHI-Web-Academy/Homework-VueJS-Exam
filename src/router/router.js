@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import CommonLayout from '../components/layouts/CommonLayout.vue'
 import Home from '../views/Home.vue'
+import Issue from "../views/Issue.vue"
 
 Vue.use(Router)
 
@@ -12,9 +14,20 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/', 
-      name: 'home',
-      component: Home
+      path: '', 
+      component: CommonLayout,
+      children: [
+        {
+          path: '/',
+          name: 'home',
+          component: Home
+        },
+        {
+          path: 'issue/:id',
+          name: 'issue',
+          component: Issue
+        }
+      ]
     }
   ]
 })

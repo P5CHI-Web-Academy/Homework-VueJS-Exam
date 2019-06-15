@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Issues</h1>
-    <Issue />
+    <Issue v-for="issue in issues" :key="issue.id" :issue='issue'/>
   </div>
 </template>
 
@@ -11,6 +11,11 @@ import Issue from './Issue.vue'
 export default {
   components: {
     Issue
+  },
+  computed: {
+    ...mapGetters({
+      issues: 'issues/getIssues'
+    })
   },
   methods: {
     ...mapActions({
