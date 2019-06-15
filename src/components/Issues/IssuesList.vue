@@ -28,6 +28,7 @@
       <v-pagination
         v-model="page"
         :length="6"
+        @
       ></v-pagination>
     </div>
   </div>
@@ -55,7 +56,7 @@ export default {
     })
   },
   created () {
-    this.fetchIssues()
+    this.fetchIssues({ 'page': this.page })
   },
   methods: {
     ...mapActions({
@@ -65,7 +66,7 @@ export default {
       return row.replace(/<[^>]+>/g, '').substr(0, 200) + '...'
     },
     newgetrequest () {
-      this.fetchIssues({ 'state': this.selected, '_limit': 20 })
+      this.fetchIssues({ 'page': this.page, 'state': this.selected, '_limit': 20 })
     }
   }
 }
