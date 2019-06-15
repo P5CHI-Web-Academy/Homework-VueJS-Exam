@@ -4,7 +4,7 @@
       v-model="selected"
       :items="issuestate"
       label="Filter Issues"
-      @change='newget'
+      @change='newgetrequest'
     ></v-select>
 
     <div v-for="issue in issueList" :key="issue.id">
@@ -24,13 +24,12 @@
       <hr>
     </div>
 
-    <!-- <div class="text-xs-center">
+    <div class="text-xs-center">
       <v-pagination
         v-model="page"
         :length="6"
       ></v-pagination>
-    </div> -->
-
+    </div>
   </div>
 </template>
 
@@ -46,7 +45,8 @@ export default {
         'closed',
         'all'
       ],
-      selected: ''
+      selected: '',
+      page: 1
     }
   },
   computed: {
@@ -55,7 +55,7 @@ export default {
     })
   },
   created () {
-    this.fetchIssues({ '_limit': 20 })
+    this.fetchIssues()
   },
   methods: {
     ...mapActions({
@@ -64,7 +64,7 @@ export default {
     shortenRow (row) {
       return row.replace(/<[^>]+>/g, '').substr(0, 200) + '...'
     },
-    newget () {
+    newgetrequest () {
       this.fetchIssues({ 'state': this.selected, '_limit': 20 })
     }
   }
