@@ -28,7 +28,7 @@
       <v-pagination
         v-model="page"
         :length="6"
-        @
+        @input='onpagechange'
       ></v-pagination>
     </div>
   </div>
@@ -66,7 +66,10 @@ export default {
       return row.replace(/<[^>]+>/g, '').substr(0, 200) + '...'
     },
     newgetrequest () {
-      this.fetchIssues({ 'page': this.page, 'state': this.selected, '_limit': 20 })
+      this.fetchIssues({ 'page': this.page, 'state': this.selected })
+    },
+    onpagechange () {
+      this.fetchIssues({ 'page': this.page, 'state': this.selected })
     }
   }
 }
