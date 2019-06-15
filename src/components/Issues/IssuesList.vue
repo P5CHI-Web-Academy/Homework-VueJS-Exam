@@ -1,6 +1,12 @@
 <template>
   <div>
-    <!-- {{ issueList }} -->
+    <v-select
+      v-model="selected"
+      :items="issuestate"
+      label="Filter Issues"
+      @change='newget'
+    ></v-select>
+
     <div v-for="issue in issueList" :key="issue.id">
       <v-layout class="mx-3 my-3">
         <v-flex>
@@ -18,6 +24,13 @@
       <hr>
     </div>
 
+    <!-- <div class="text-xs-center">
+      <v-pagination
+        v-model="page"
+        :length="6"
+      ></v-pagination>
+    </div> -->
+
   </div>
 </template>
 
@@ -26,13 +39,23 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'IssuesList',
+  data () {
+    return {
+      issuestate: [
+        'open',
+        'closed',
+        'all'
+      ],
+      selected: ''
+    }
+  },
   computed: {
     ...mapGetters({
       issueList: 'issues/getIssueList'
     })
   },
   created () {
-    this.fetchIssues('?_limit=20')
+    this.fetchIssues({ 'state': this.selected, '_limit': 20 })
   },
   methods: {
     ...mapActions({
@@ -40,6 +63,9 @@ export default {
     }),
     shortenRow (row) {
       return row.replace(/<[^>]+>/g, '').substr(0, 200) + '...'
+    },
+    newget () {
+      this.fetchIssues({ 'state': this.selected, '_limit': 20 })
     }
   }
 }

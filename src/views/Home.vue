@@ -1,6 +1,8 @@
 <template>
   <div>
-    Home Page
+    <h2>
+      Click on "Issues" to see the Issues
+    </h2>
   </div>
 </template>
 
