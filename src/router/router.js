@@ -25,6 +25,8 @@ export default new Router({
         {
           path: 'issue/:id',
           name: 'issue',
+          params: ['id'],
+          props: true,
           component: Issue
         }
       ]
