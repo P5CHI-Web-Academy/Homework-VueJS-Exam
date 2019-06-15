@@ -2,16 +2,14 @@
   <div>
     <v-toolbar>
       <v-toolbar-title>
-        <router-link to="/">Github</router-link>
+        <router-link to="home">Github</router-link>
       </v-toolbar-title>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn flat>
-          <router-link to="/issues">Issues</router-link>
+          <router-link to="issues">Issues</router-link>
         </v-btn>
       </v-toolbar-items>
-
       <v-spacer />
-
     </v-toolbar>
   </div>
 </template>

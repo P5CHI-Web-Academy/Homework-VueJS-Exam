@@ -1,18 +1,18 @@
 <template>
   <v-navigation-drawer>
     <v-list dense class="pt-0">
-      <v-list-tile @click="">
+      <v-list-tile>
         <v-list-tile-content>
           <v-list-tile-title>
-            <router-link to="/" active-class="active">Home</router-link>
+            <router-link to="home" active-class="active">Home</router-link>
           </v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
 
-      <v-list-tile @click="">
+      <v-list-tile>
         <v-list-tile-content>
           <v-list-tile-title>
-            <router-link to="/issues" active-class="active">Issues</router-link>
+            <router-link to="issues" active-class="active">Issues</router-link>
           </v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
