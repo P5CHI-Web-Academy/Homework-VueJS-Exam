@@ -1,11 +1,23 @@
 <template>
   <div>
-    <v-select
-      v-model="selected"
-      :items="issuestate"
-      label="Filter Issues"
-      @change='newgetrequest'
-    ></v-select>
+    <v-layout>
+      <v-flex>
+        <v-select
+          v-model="selected"
+          :items="issuestate"
+          label="Filter Issues"
+          @change="newgetrequest"
+        />
+      </v-flex>
+      <v-flex>
+        <v-select
+          v-model="perPage"
+          :items="itemsPerPage"
+          label="Issues per page"
+          @change="newgetrequest"
+        />
+      </v-flex>
+    </v-layout>
 
     <div v-for="issue in issueList" :key="issue.id">
       <v-layout class="mx-3 my-3">
@@ -28,8 +40,8 @@
       <v-pagination
         v-model="page"
         :length="6"
-        @input='onpagechange'
-      ></v-pagination>
+        @input="onpagechange"
+      />
     </div>
   </div>
 </template>
@@ -46,8 +58,15 @@ export default {
         'closed',
         'all'
       ],
-      selected: '',
-      page: 1
+      itemsPerPage: [
+        10,
+        20,
+        30,
+        40
+      ],
+      selected: 'open',
+      page: 1,
+      perPage: 10
     }
   },
   computed: {
@@ -56,7 +75,7 @@ export default {
     })
   },
   created () {
-    this.fetchIssues({ 'page': this.page })
+    this.fetchIssues({ 'page': this.page, 'state': this.selected, 'per_page': this.perPage })
   },
   methods: {
     ...mapActions({
@@ -66,10 +85,11 @@ export default {
       return row.replace(/<[^>]+>/g, '').substr(0, 200) + '...'
     },
     newgetrequest () {
-      this.fetchIssues({ 'page': this.page, 'state': this.selected })
+      this.fetchIssues({ 'page': this.page, 'state': this.selected, 'per_page': this.perPage })
+      console.log(this.perPage)
     },
     onpagechange () {
-      this.fetchIssues({ 'page': this.page, 'state': this.selected })
+      this.fetchIssues({ 'page': this.page, 'state': this.selected, 'per_page': this.perPage })
     }
   }
 }
