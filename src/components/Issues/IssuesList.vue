@@ -55,7 +55,7 @@ export default {
     })
   },
   created () {
-    this.fetchIssues({ 'state': this.selected, '_limit': 20 })
+    this.fetchIssues({ '_limit': 20 })
   },
   methods: {
     ...mapActions({
