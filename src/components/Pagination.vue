@@ -1,26 +1,26 @@
 <template>
-  <nav aria-label="Page navigation example">
+  <nav>
     <ul class="pagination justify-content-center">
-      <li :class="firstPage <= 1 ? 'page-item disabled' : 'page-item' ">
+      <li :class="changeClass">
         <button
           class="page-link"
-          @click="firstPage <= 1 ? null : setFirstPage(firstPage - 1)"
+          @click="moveToPreviousPage"
         >Previous</button>
       </li>
       <li class="page-item active">
         <button class="page-link">
-          {{firstPage}}
+          {{ firstPaginationButton }}
           <span class="sr-only">(current)</span>
         </button>
       </li>
       <li class="page-item">
-        <button class="page-link" @click="setFirstPage(secondPage)">{{secondPage}}</button>
+        <button class="page-link" @click="setFirstPaginationButton(secondPage)">{{ secondPage }}</button>
       </li>
       <li class="page-item">
-        <button class="page-link" @click="setFirstPage(thirdPage)">{{thirdPage}}</button>
+        <button class="page-link" @click="setFirstPaginationButton(thirdPage)">{{ thirdPage }}</button>
       </li>
       <li class="page-item">
-        <button class="page-link" @click="setFirstPage(firstPage + 1)">Next</button>
+        <button class="page-link" @click="setFirstPaginationButton(firstPaginationButton + 1)">Next</button>
       </li>
     </ul>
   </nav>
@@ -33,20 +33,26 @@ export default {
   name: 'Pagination',
   computed: {
     ...mapGetters({
-      firstPage: 'GET_FIRST_PAGE'
+      firstPaginationButton: 'GET_FIRST_PAGINATION_BUTTON'
     }),
     secondPage () {
-      return this.firstPage + 1
+      return this.firstPaginationButton + 1
     },
     thirdPage () {
-      return this.firstPage + 2
+      return this.firstPaginationButton + 2
     }
   },
   methods: {
     ...mapActions({
-      setFirstPage: 'SET_FIRST_PAGE',
+      setFirstPaginationButton: 'SET_FIRST_PAGINATION_BUTTON',
       setIsLoading: 'SET_ISLOADING'
-    })
+    }),
+    moveToPreviousPage () {
+      return this.firstPaginationButton <= 1 ? null : this.setFirstPaginationButton(this.firstPaginationButton - 1)
+    },
+    changeClass () {
+      return this.firstPaginationButton <= 1 ? 'page-item disabled' : 'page-item'
+    }
   }
 }
 </script>

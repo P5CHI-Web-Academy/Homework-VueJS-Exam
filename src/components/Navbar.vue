@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <router-link class="navbar-brand" to="/">Github</router-link>
+    <router-link class="navbar-brand" :to="{ name: 'Home' }">Github</router-link>
     <form class="form-inline">
       <input
         class="form-control mr-sm-2"
@@ -13,13 +13,13 @@
       <ul class="navbar-nav mr-auto">
         <router-link
           v-for="item in itemList"
-          :to="{name: item.routeName}"
+          :to="{ name: item.routeName }"
           tag="li"
           class="nav-item"
           activeClass="active"
           :key="item.itemName"
         >
-          <a class="nav-link">{{item.itemName}}</a>
+          <a class="nav-link">{{ item.itemName }}</a>
         </router-link>
       </ul>
     </div>

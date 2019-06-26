@@ -4,38 +4,37 @@
     <div class="card">
       <div class="card-content">
         <h3 class="issue-title">
-          {{issue.title}}
-          <span class="issue-number">#{{issue.number}}</span>
+          {{ issue.title }}
+          <span class="issue-number">#{{ issue.number }}</span>
         </h3>
 
         <div style="marginBottom: 10px">
           <span
             class="badge"
-            :class="issue.state === 'open' || issue.state === 'all' ? 'badge-success' : 'badge-danger'"
+            :class="detectState(issue.state)"
           >{{issue.state}}</span>
-          <span style="margin-left: 10px; fontWeight: bold">{{issue.user.login}}</span>
+          <span class="font-weight-bold issue-user-login">{{ issue.user.login }}</span>
           <span>
             opened this issue on {{date}}
             <span>&#183;</span>
-            {{issue.comments}} comments
+            {{ issue.comments }} comments
           </span>
         </div>
         <hr>
         <div>
           <img
             :src="issue.user.avatar_url"
-            class="rounded float-left"
-            style="width: 75px; height: 75px; marginRight: 20px"
+            class="rounded float-left issue-user-avatar"
             alt="..."
           >
           <div class="card">
             <div class="card-header">
-              <span style="fontWeight: bold">{{issue.user.login}}</span>
+              <span class="font-weight-bold">{{ issue.user.login }}</span>
               commented on
-              <span>{{date}}</span>
+              <span>{{ date }}</span>
             </div>
             <div class="card-body">
-              <span class="card-text">{{issue.body}}</span>
+              <span class="card-text">{{ issue.body }}</span>
             </div>
           </div>
         </div>
@@ -74,7 +73,10 @@ export default {
       setSelectedIssue: 'SET_SELECTED_ISSUE',
       setIsLoading: 'SET_ISLOADING',
       setComments: 'SET_COMMENTS'
-    })
+    }),
+    detectState (state) {
+      return (state === 'open' || state === 'all' ? 'badge-success' : 'badge-danger')
+    }
   },
   watch: {
     issue (newValue, oldValue) {
@@ -112,5 +114,15 @@ export default {
 
 .card-content {
   padding: 20px;
+}
+
+.issue-user-login {
+  margin-left: 10px;
+}
+
+.issue-user-avatar {
+  width: 75px;
+  height: 75px;
+  margin-right: 20px;
 }
 </style>

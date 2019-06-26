@@ -8,8 +8,8 @@
         class="btn btn-secondary"
         @click="setState(button.toLowerCase())"
         :key="button"
-        :class=" itemsState === button.toLowerCase() ? 'active' : null"
-      >{{button}}</button>
+        :class="detectState(itemsState, button)"
+      >{{ button }}</button>
     </div>
   </div>
 </template>
@@ -35,6 +35,9 @@ export default {
     }),
     setState (value) {
       this.setItemsState(value)
+    },
+    detectState (state, button) {
+      return state === button.toLowerCase() ? 'active' : null
     }
   }
 }

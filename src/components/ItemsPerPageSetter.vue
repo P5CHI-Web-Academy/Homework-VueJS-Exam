@@ -9,7 +9,7 @@
         @click="setItemsPerPage(button)"
         :key="button"
         :class=" itemsPerPage === button ? 'active' : null"
-      >{{button}}</button>
+      >{{ button }}</button>
     </div>
   </div>
 </template>

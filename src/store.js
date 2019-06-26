@@ -13,7 +13,7 @@ export default new Vuex.Store({
     list: [],
     selectedIssue: null,
     comments: [],
-    firstPage: 1,
+    firstPaginationButton: 1,
     isLoading: false,
     itemsPerPage: 10,
     itemsState: 'all'
@@ -30,9 +30,9 @@ export default new Vuex.Store({
     SET_COMMENTS: (state, comments) => {
       state.comments = comments
     },
-    SET_FIRST_PAGE: (state, number) => {
+    SET_FIRST_PAGINATION_BUTTON: (state, number) => {
       state.isLoading = true
-      state.firstPage = number
+      state.firstPaginationButton = number
     },
     SET_ISLOADING: (state, param) => {
       state.isLoading = param
@@ -57,8 +57,8 @@ export default new Vuex.Store({
       axiosClient.get(`repos/vuejs/vue/issues/${number}/comments`)
         .then(res => { commit('SET_COMMENTS', res.data) })
     },
-    SET_FIRST_PAGE: ({ commit }, number) => {
-      commit('SET_FIRST_PAGE', number)
+    SET_FIRST_PAGINATION_BUTTON: ({ commit }, number) => {
+      commit('SET_FIRST_PAGINATION_BUTTON', number)
     },
     SET_ISLOADING: ({ commit }, param) => {
       commit('SET_ISLOADING', param)
@@ -74,7 +74,7 @@ export default new Vuex.Store({
     GET_LIST: state => state.list,
     GET_SELECTED_ISSUE: state => state.selectedIssue,
     GET_COMMENTS: state => state.comments,
-    GET_FIRST_PAGE: state => state.firstPage,
+    GET_FIRST_PAGINATION_BUTTON: state => state.firstPaginationButton,
     GET_ISLOADING: state => state.isLoading,
     GET_ITEMS_PER_PAGE: state => state.itemsPerPage,
     GET_ITEMS_STATE: state => state.itemsState
