@@ -33,7 +33,7 @@ export default {
   computed: {
     ...mapGetters({
       issues: 'GET_LIST',
-      page: 'GET_FIRST_PAGINATION_BUTTON',
+      page: 'GET_PAGE',
       itemsPerPage: 'GET_ITEMS_PER_PAGE',
       itemsState: 'GET_ITEMS_STATE',
       isLoading: 'GET_ISLOADING'

@@ -11,11 +11,11 @@
         <div style="marginBottom: 10px">
           <span
             class="badge"
-            :class="detectState(issue.state)"
+            :class="issue.state | detectState"
           >{{issue.state}}</span>
           <span class="font-weight-bold issue-user-login">{{ issue.user.login }}</span>
           <span>
-            opened this issue on {{date}}
+            opened this issue on {{ issue.created_at | formatData }}
             <span>&#183;</span>
             {{ issue.comments }} comments
           </span>
@@ -31,7 +31,7 @@
             <div class="card-header">
               <span class="font-weight-bold">{{ issue.user.login }}</span>
               commented on
-              <span>{{ date }}</span>
+              <span>{{ issue.created_at | formatData }}</span>
             </div>
             <div class="card-body">
               <span class="card-text">{{ issue.body }}</span>
@@ -48,35 +48,28 @@
 import { mapGetters, mapActions } from 'vuex'
 import Comment from '@/components/Comment'
 import Spinner from '@/components/Spinner'
+import { formatData } from '@/filters/formatData'
+import { detectState } from '@/filters/detectState'
 
 export default {
   name: 'IssueDetail',
+  filters: {
+    formatData,
+    detectState
+  },
   computed: {
     ...mapGetters({
       issue: 'GET_SELECTED_ISSUE',
       isLoading: 'GET_ISLOADING',
       comments: 'GET_COMMENTS'
-    }),
-    date () {
-      return new Date(Date.parse(this.issue.created_at)).toLocaleDateString(
-        'en-US',
-        {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        }
-      )
-    }
+    })
   },
   methods: {
     ...mapActions({
       setSelectedIssue: 'SET_SELECTED_ISSUE',
       setIsLoading: 'SET_ISLOADING',
       setComments: 'SET_COMMENTS'
-    }),
-    detectState (state) {
-      return (state === 'open' || state === 'all' ? 'badge-success' : 'badge-danger')
-    }
+    })
   },
   watch: {
     issue (newValue, oldValue) {

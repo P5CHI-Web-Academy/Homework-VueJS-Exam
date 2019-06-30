@@ -9,18 +9,18 @@
       </li>
       <li class="page-item active">
         <button class="page-link">
-          {{ firstPaginationButton }}
+          {{ page }}
           <span class="sr-only">(current)</span>
         </button>
       </li>
       <li class="page-item">
-        <button class="page-link" @click="setFirstPaginationButton(secondPage)">{{ secondPage }}</button>
+        <button class="page-link" @click="setPage(secondPage)">{{ secondPage }}</button>
       </li>
       <li class="page-item">
-        <button class="page-link" @click="setFirstPaginationButton(thirdPage)">{{ thirdPage }}</button>
+        <button class="page-link" @click="setPage(thirdPage)">{{ thirdPage }}</button>
       </li>
       <li class="page-item">
-        <button class="page-link" @click="setFirstPaginationButton(firstPaginationButton + 1)">Next</button>
+        <button class="page-link" @click="setPage(page + 1)">Next</button>
       </li>
     </ul>
   </nav>
@@ -33,25 +33,25 @@ export default {
   name: 'Pagination',
   computed: {
     ...mapGetters({
-      firstPaginationButton: 'GET_FIRST_PAGINATION_BUTTON'
+      page: 'GET_PAGE'
     }),
     secondPage () {
-      return this.firstPaginationButton + 1
+      return this.page + 1
     },
     thirdPage () {
-      return this.firstPaginationButton + 2
+      return this.page + 2
     }
   },
   methods: {
     ...mapActions({
-      setFirstPaginationButton: 'SET_FIRST_PAGINATION_BUTTON',
+      setPage: 'SET_PAGE',
       setIsLoading: 'SET_ISLOADING'
     }),
     moveToPreviousPage () {
-      return this.firstPaginationButton <= 1 ? null : this.setFirstPaginationButton(this.firstPaginationButton - 1)
+      return this.page <= 1 ? null : this.setPage(this.page - 1)
     },
     changeClass () {
-      return this.firstPaginationButton <= 1 ? 'page-item disabled' : 'page-item'
+      return this.page <= 1 ? 'page-item disabled' : 'page-item'
     }
   }
 }

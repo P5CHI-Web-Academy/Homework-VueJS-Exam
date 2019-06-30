@@ -4,15 +4,15 @@
       <div class="position-relative">
         <span
           class="badge issue-state-badge"
-          :class="detectState(issue.state)"
+          :class="issue.state | detectState"
         >!</span>
-        <router-link :to="{name: 'IssueDetail', params: { number: issue.number }}">
+        <router-link :to="{ name: 'IssueDetail', params: { number: issue.number } }">
           <h5 class="card-title issue-title">{{ issue.title }}</h5>
         </router-link>
       </div>
       <p class="card-text">
         <span class="font-weight-bold">#{{ issue.number }}</span>
-        opened {{ issue.create_at }} by
+        opened {{ issue.created_at }} by
         <span class="font-weight-bold">{{ issue.user.login }}</span>
       </p>
     </div>
@@ -20,13 +20,13 @@
 </template>
 
 <script>
+import { detectState } from '@/filters/detectState'
+
 export default {
   name: 'Issue',
   props: ['issue'],
-  methods: {
-    detectState (state) {
-      return (state === 'open' || state === 'all' ? 'badge-success' : 'badge-danger')
-    }
+  filters: {
+    detectState
   }
 }
 </script>

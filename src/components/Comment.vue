@@ -11,7 +11,7 @@
         <div class="card-header">
           <span class="font-weight-bold">{{ comment.user.login }}</span>
           commented on
-          <span>{{ date }}</span>
+          <span>{{ comment.created_at | formatData }}</span>
         </div>
         <div class="card-body">
           <span class="card-text">{{ comment.body }}</span>
@@ -22,20 +22,13 @@
 </template>
 
 <script>
+import { formatData } from  '@/filters/formatData'
+
 export default {
   name: 'Comment',
   props: ['comment'],
-  computed: {
-    date () {
-      return new Date(Date.parse(this.comment.created_at)).toLocaleDateString(
-        'en-US',
-        {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        }
-      )
-    }
+  filters: {
+    formatData
   }
 }
 </script>
